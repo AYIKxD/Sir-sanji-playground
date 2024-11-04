@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Build Configuration. Required variables to compile the ROM.
-CONFIG_LUNCH="lineage_ares-userdebug"
+CONFIG_LUNCH="lineage_ares-ap2a-userdebug"
 CONFIG_OFFICIAL_FLAG="1"
 CONFIG_TARGET="bacon"
 
@@ -106,17 +106,6 @@ send_file() {
         -F chat_id="$2" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html"
-}
-
-send_sticker() {
-    curl -sL "$1" -o "$ROOT_DIRECTORY/sticker.webp"
-
-    local STICKER_FILE="$ROOT_DIRECTORY/sticker.webp"
-
-    curl "$BOT_STICKER_URL" -F sticker=@"$STICKER_FILE" \
-        -F chat_id="$2" \
-        -F "is_animated=false" \
-        -F "is_video=false"
 }
 
 pin_message() {
@@ -380,7 +369,6 @@ else
 
     edit_message "$build_finished_message" "$CONFIG_CHATID" "$build_message_id"
     pin_message "$CONFIG_CHATID" "$build_message_id"
-#     send_sticker "$STICKER_URL" "$CONFIG_CHATID"
 fi
 
 if [[ $POWEROFF == true ]]; then
